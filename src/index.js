@@ -193,14 +193,7 @@ class Service {
         throw new errors.NotFound(`No record found for id '${id}'`);
       }
 
-      let copy = {};
-      Object.keys(instance.toJSON()).forEach(key => {
-        if (typeof data[key] !== 'undefined') {
-          copy[key] = data[key];
-        }
-      });
-
-      return instance.update(copy, { raw: false }).then(instance => {
+      return instance.update(data, { raw: false }).then(instance => {
         if (options.raw === false) {
           return instance;
         }
